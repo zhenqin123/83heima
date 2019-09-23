@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import Home from './views/home/'
 import Login from './views/login'
 import Main from './views/home/main'
-import Comment from './views/comment'
-
+// import Comment from './views/comment'
+// import Material from './views/material'
 Vue.use(Router)
 
 export default new Router({
@@ -22,7 +22,12 @@ export default new Router({
       },
       {
         path: 'comment',
-        component: Comment
+        component: () => import('./views/comment')
+
+      },
+      {
+        path: 'material',
+        component: () => import('./views/material')
 
       }
       ]

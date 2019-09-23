@@ -1,6 +1,10 @@
 import axios from 'axios'
 import router from '../permission'
 import { Message } from 'element-ui'
+import jsonBig from 'json-bigint'
+axios.defaults.transformResponse = [function (data) {
+  return jsonBig.parse(data)
+}]
 axios.interceptors.request.use(function (config) {
   let token = window.localStorage.getItem('use-token')
   config.headers['Authorization'] = `Bearer ${token}`
