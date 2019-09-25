@@ -44,6 +44,11 @@ export default new Router({
         path: 'publish/:id',
         component: () => import('./views/publish')
 
+      },
+      {
+        path: 'account',
+        component: () => import('./views/account')
+
       }
       ]
 
@@ -52,6 +57,7 @@ export default new Router({
       path: '/login',
       component: Login
     }
+
     // {
     //   path: '/about',
     //   name: 'about',

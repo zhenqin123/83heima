@@ -15,12 +15,13 @@
                 <quill-Editor  v-model="formdata.content" style="height:300px"></quill-Editor>
             </el-form-item>
             <el-form-item label="封面" prop="cover" style="margin-top:100px">
-                <el-radio-group v-model="formdata.cover.type">
+                <el-radio-group v-model="formdata.cover.type" @change="changeType">
                 <el-radio :label="1">单图</el-radio>
                 <el-radio :label="3">三图</el-radio>
                 <el-radio :label="0">无图</el-radio>
                 <el-radio :label="-1">自动</el-radio>
   </el-radio-group>
+                 <cover-image :images="formdata.cover.images" @imageUrl1="getimages" ></cover-image>
             </el-form-item>
             <el-form-item label="频道" prop="channel_id">
                  <el-select  placeholder="请选择" v-model="formdata.channel_id">
@@ -61,6 +62,23 @@ export default {
     }
   },
   methods: {
+    getimages (url, index) {
+      this.formdata.cover.images = this.formdata.cover.images.map((item, i) => {
+        if (i === index) {
+          return url
+        }
+        return item
+      })
+    },
+    changeType () {
+      if (this.formdata.cover.type === 1) {
+        this.formdata.cover.images = ['']
+      } else if (this.formdata.cover.type === 3) {
+        this.formdata.cover.images = ['', '', '']
+      } else {
+        this.formdata.cover.images = []
+      }
+    },
     getDatabyId (id) {
       this.$axios({
         url: `/articles/${id}`
