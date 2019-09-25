@@ -29,6 +29,21 @@ export default new Router({
         path: 'material',
         component: () => import('./views/material')
 
+      },
+      {
+        path: 'articles',
+        component: () => import('./views/articles')
+
+      },
+      {
+        path: 'publish',
+        component: () => import('./views/publish')
+
+      },
+      {
+        path: 'publish/:id',
+        component: () => import('./views/publish')
+
       }
       ]
 

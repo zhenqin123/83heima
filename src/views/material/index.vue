@@ -13,8 +13,8 @@
       <el-card class="img-item" v-for="item in list" :key="item.id">
         <img :src="item.url">
          <div class="operate">
-        <i class="el-icon-star-on" :style="{color:item.is_collected?'red':'#000'}"></i>
-        <i class="el-icon-delete-solid"></i>
+        <i @click="changeCollect(item)"  class="el-icon-star-on" :style="{color:item.is_collected?'red':'#000'}"></i>
+        <i @click=" deleimg(item.id)" class="el-icon-delete-solid"></i>
       </div>
       </el-card>
       </div>
@@ -68,6 +68,28 @@ export default {
     }
   },
   methods: {
+    changeCollect (item) {
+      let mess = item.is_collected ? '取消' : ''
+      this.$confirm(`是否要${mess}收藏图片`).then(() => {
+        this.$axios({
+          url: `/user/images/${item.id}`,
+          method: 'PUT',
+          data: { collect: !item.is_collected }
+        }).then(() => {
+          this.getMaterial()
+        })
+      })
+    },
+    deleimg (id) {
+      this.$confirm('您确定要删除吗？').then(() => {
+        this.$axios({
+          url: `/user/images/${id}`,
+          method: 'DELETE'
+        }).then(() => {
+          this.getMaterial()
+        })
+      })
+    },
     uploadimg (params) {
       const data = new FormData()
       data.append('image', params.file)
