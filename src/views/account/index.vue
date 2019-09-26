@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import eventBus from '../../utils/eventBus'
 export default {
   data () {
     return {
@@ -58,6 +59,7 @@ export default {
         method: 'PATCH',
         data
       }).then(result => {
+        eventBus.$emit('save-change')
         this.formdata.photo = result.data.photo
       })
     },
@@ -78,6 +80,7 @@ export default {
             method: 'PATCH',
             data: this.formdata
           }).then(() => {
+            eventBus.$emit('save-change')
             this.$message({ message: '保存成功', type: 'success' })
           })
         }

@@ -49,6 +49,11 @@ export default new Router({
         path: 'account',
         component: () => import('./views/account')
 
+      },
+      {
+        path: 'Graphicdata',
+        component: () => import('./views/Graphicdata')
+
       }
       ]
 
@@ -56,6 +61,11 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '*',
+      component: () => import('./views/404')
+
     }
 
     // {
